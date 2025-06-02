@@ -1,4 +1,4 @@
-#👤 Portofolio
+# 👤 Portofolio
 
 Website portofolio sederhana yang menampilkan profil, info dan kontak.  
 Dibangun dengan HTML, CSS, dan JavaScript dengan efek hujan dan kilat yang keren.
