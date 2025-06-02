@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Portofolio - Kai</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Orbitron', sans-serif;
+      background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
+      color: white;
+      overflow-x: hidden;
+    }
+
+    .container {
+      text-align: center;
+      padding: 40px 20px;
+      position: relative;
+      overflow: hidden;
+      background-color: rgba(0, 0, 0, 0.7);
+    }
+
+    .profile-card img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 3px solid cyan;
+      margin-bottom: 10px;
+    }
+
+    .profile-card h2 {
+      margin: 0;
+      color: cyan;
+      font-size: 28px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .nav-buttons {
+      margin-top: 20px;
+    }
+
+    .nav-buttons a {
+      padding: 10px 15px;
+      margin: 5px;
+      background: cyan;
+      color: black;
+      border-radius: 25px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .nav-buttons a:hover {
+      background: #00ffff;
+    }
+
+    .section {
+      display: none;
+      padding: 30px;
+      max-width: 800px;
+      margin: 20px auto;
+      background: #111;
+      border-radius: 12px;
+      opacity: 0;
+      transform: translateY(30px);
+    }
+
+    .section.show {
+      display: block;
+      animation: fadeSlide 1s forwards;
+    }
+
+    @keyframes fadeSlide {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Rain Effect */
+    .rain {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .drop {
+      position: absolute;
+      width: 2px;
+      height: 15px;
+      background: rgba(173, 216, 230, 0.7);
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(100vh);
+      }
+    }
+
+    /* Lightning Effect */
+    .lightning {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: white;
+      opacity: 0;
+      z-index: 2;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container profile-card">
+    <img src="Gambar.jpg" alt="Kai">
+    <h2>Kai</h2>
+
+    <!-- Rain & Lightning -->
+    <div class="rain" id="rain"></div>
+    <div class="lightning" id="lightning"></div>
+
+    <div class="nav-buttons">
+      <a href="#" onclick="showSection('home')">Home</a>
+      <a href="#" onclick="showSection('about')">About</a>
+      <a href="#" onclick="showSection('contact')">Contact</a>
+    </div>
+  </div>
+
+  <div id="home" class="section show">
+    <h1>Welcome to My Website!</h1>
+    <p>Halo, aku Kai! Di sini kamu bisa menemukan berbagai proyek dan game yang aku buat dengan HTML, CSS, dan JavaScript. Aku senang belajar dan berbagi karya digitalku.</p>
+  </div>
+
+  <div id="about" class="section">
+    <h1>About Me</h1>
+    <p>Halo, aku Kai! Seorang pelajar yang tertarik dengan dunia teknologi dan pemrograman. Aku suka membuat berbagai project kreatif dengan HTML, CSS, dan JavaScript. Belajar hal baru dan menciptakan sesuatu dari nol adalah hal yang sangat aku nikmati. Tujuanku adalah menjadi developer hebat yang bisa menginspirasi lewat karya digital.</p>
+  </div>
+
+  <div id="contact" class="section">
+    <h1>Contact Me</h1>
+    <p>✉️ Gmail: kai.programmer22@gmail.com</p>
+<p>💻 GitHub: <a href="https://github.com/Kai-Programmer" target="_blank">github.com/Kai-Programmer</a></p>
+<p>📱 WhatsApp: 0813-6254-4020</p>
+  </div>
+
+  <script>
+    function showSection(id) {
+      const sections = document.querySelectorAll('.section');
+      sections.forEach(section => {
+        section.classList.remove('show');
+        setTimeout(() => {
+          section.style.display = 'none';
+        }, 200);
+      });
+
+      const target = document.getElementById(id);
+      if (target) {
+        setTimeout(() => {
+          target.style.display = 'block';
+          target.classList.add('show');
+        }, 200);
+      }
+    }
+
+    // Rain Generator
+    const rainContainer = document.getElementById('rain');
+    for (let i = 0; i < 150; i++) {
+      const drop = document.createElement('div');
+      drop.className = 'drop';
+      drop.style.left = Math.random() * 100 + '%';
+      drop.style.animationDuration = (0.5 + Math.random()).toFixed(2) + 's';
+      drop.style.animationDelay = (Math.random() * 5).toFixed(2) + 's';
+      rainContainer.appendChild(drop);
+    }
+
+    // Lightning Effect
+    const lightning = document.getElementById('lightning');
+    function flashLightning() {
+      lightning.style.opacity = '0.8';
+      setTimeout(() => lightning.style.opacity = '0', 100);
+      setTimeout(() => {
+        if (Math.random() > 0.5) flashLightning();
+      }, 200);
+    }
+
+    function startLightning() {
+      setInterval(() => {
+        if (Math.random() > 0.8) flashLightning();
+      }, 3000);
+    }
+
+    startLightning();
+  </script>
+
+</body>
+</html>
